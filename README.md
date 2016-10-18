@@ -15,6 +15,21 @@ To get the website running, first clone the repository:
 
 This will fetch the vendors and all it's dependencies.
 
+### Create  parameters.yml in app/config/ ###
+
+     parameters:
+         database_driver:   pdo_mysql
+         database_host:     127.0.0.1
+         database_port:     ~
+         database_name:     databsename
+         database_user:     root
+         database_password: password
+
+         mailer_transport:  smtp
+         mailer_host:       127.0.0.1
+         mailer_user:       ~
+         mailer_password:   ~
+
 The next step is to setup the database:
 
     $ bin/console doctrine:database:create
