@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Simple mebreship app, homepage
+{% endblock %}
+
+{% block body %}
+<div class="app-header">
+	<h1 class="app-title">App index page</h1>
+	<p class="lead app-description">List of birthdays in the current
+		month and expired membership fees.</p>
+</div>
+<div class="row">
+
+	<div class="col-lg-4 col-sm-4 col-xs-12">
+
+
+		<div class="well member-box">
+			<div class="header bordered-blue">Birthdays in the current month</div>
+			{% if bhirthDays %}	
+			{% for bhirthDay in bhirthDays %}
+			<div class="admin-index">
+				<a href="{{ path('admin_edit_member', {'id':bhirthDay.id}) }}" class="admin-link"><h3>{{ bhirthDay.firstName }} {{ bhirthDay.lastName }}</h3></a>
+				<p>{{ bhirthDay.address }},  {{ bhirthDay.city }}</p>
+				<span class="meta">Birthday: {{ bhirthDay.birthDate|date("F jS \\- Y") }}</span>
+				<hr class="line">
+			</div>
+			{% endfor %}
+			{% else %}
+			<p>No birthdays in the current month</p>
+			{% endif %}
+
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-4 col-xs-12">
+
+		<div class="well member-box">
+			<div class="header bordered-blue">Expired membership fees</div>
+			
+			{% if expiredMembers %}	
+			{% for expiredMember in expiredMembers %}
+			<div class="admin-index">
+				<a href="{{ path('admin_edit_member', {'id':expiredMember.id}) }}" class="admin-link"><h3>{{ expiredMember.firstName }} {{ expiredMember.lastName }}</h3></a>
+				<p>{{ expiredMember.address }},  {{ expiredMember.city }}</p>
+				<span class="meta">Membership number: {{ expiredMember.membershipNumber }}</span><br>
+				<span class="meta">Expired date: {{ expiredMember.validDate|date("F jS \\- Y") }}</span>
+				<hr class="line">
+			</div>
+			{% endfor %}
+			{% else %}
+			<p>No expired membership fees in the current month</p>
+			{% endif %}
+		</div>
+		</div>
+		
+			<div class="col-lg-4 col-sm-4 col-xs-12">
+
+		<div class="well member-box">
+			<div class="header bordered-blue">Notes in the last 3 months</div>
+			{% if lastNotes %}	
+			{% for lastNote in lastNotes %}
+			<div class="admin-index">
+				<a href="{{ path('admin_member_note_edit', {'id':lastNote.id}) }}" class="admin-link"><h3>{{ lastNote.title }}</h3></a>
+				<a href="{{ path('admin_edit_member', {'id':lastNote.member.id}) }}" class="admin-note-link">Member: {{ lastNote.member.firstName }} {{ lastNote.member.lastName }}</a><br>
+				<span class="meta">Created at: {{ lastNote.createdAt|date("F jS \\- Y") }}</span>
+				<div class="label-task">
+				{%  if(lastNote.status == 1) %}
+				<span class="label label-red">Avctive</span>
+				{% elseif(lastNote.status == 2) %}
+				<span class="label label-yellow">In Progres</span>
+				{% else %}
+				<span class="label label-green">Aproved</span>
+				{% endif %}
+				</div>
+				<hr class="line">
+			</div>
+			{% endfor %}
+			{% else %}
+			<p>No note in the last 3 months</p>
+			{% endif %}
+		</div>
+		
+		
+	</div>
+	
+</div>
+{%  endblock %}
+
+

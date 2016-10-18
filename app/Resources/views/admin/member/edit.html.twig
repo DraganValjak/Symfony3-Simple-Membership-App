@@ -1,0 +1,52 @@
+{% extends 'admin/member/formLayout.html.twig' %}
+
+{% block title %}
+Edit member
+{% endblock %}
+
+
+{% block body %}
+<div class="app-header">
+	<h1 class="app-title">App View/Edit page</h1>
+	<p class="lead app-description">View/Edit <strong>{{ member.firstName }} {{ member.lastName }}</strong></p>
+</div>
+<div class="row">
+
+	<div class="col-lg-6 col-sm-6 col-xs-12">
+
+     {{ include('admin/member/_form.html.twig') }}     
+	</div>
+	<div class="col-lg-6 col-sm-6 col-xs-12">
+<div class="well member-box">
+			<div class="header bordered-blue">Notes
+			<div class="pull-right"><a href="{{ path('admin_member_new_note', {'id':member.id}) }}" class="btn-sm btn-success"><i class="fa fa-plus"></i>  Add note</a></div>
+			</div>
+			
+			
+			{% if meberNotes %}	
+			{% for meberNote in meberNotes %}
+			<div class="admin-index">
+				<a href="{{ path('admin_member_note_edit', {'id':meberNote.id}) }}" class="admin-link"><h3>{{ meberNote.title }}</h3></a>
+				<span class="meta">Created at: {{ meberNote.createdAt|date("F jS \\- Y") }}</span>
+				<div class="label-task">
+				{%  if(meberNote.status == 1) %}
+				<span class="label label-red">Avctive</span>
+				{% elseif(meberNote.status == 2) %}
+				<span class="label label-yellow">In Progres</span>
+				{% else %}
+				<span class="label label-green">Aproved</span>
+				{% endif %}
+				</div>
+				<hr class="line">
+			</div>
+			{% endfor %}
+			{% else %}
+			<p>No note.</p>
+			{% endif %}
+		</div>
+		
+	</div>
+	
+</div>
+{%  endblock %}
+
