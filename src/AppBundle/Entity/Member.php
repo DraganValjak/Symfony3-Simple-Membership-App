@@ -112,6 +112,7 @@ class Member
 	
 	/**
 	 * @ORM\Column(type="string", length=5)
+	 * @Assert\NotBlank()
 	 * @Assert\Type(type="string")
 	 * 
 	 * @var string
