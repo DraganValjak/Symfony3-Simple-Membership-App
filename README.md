@@ -17,14 +17,14 @@ This will fetch the vendors and all it's dependencies.
 
 The next step is to setup the database:
 
-    bin/console doctrine:database:create
-    bin/console doctrine:schema:update --force
-    bin/console doctrine:fixtures:load
+    $ bin/console doctrine:database:create
+    $ bin/console doctrine:schema:update --force
+    $ bin/console doctrine:fixtures:load
 
 
 ## Access by web browser
    
-   bin/console server:run
+    $ bin/console server:run
     
 
 Then point your browser to 127.0.0.1:8000
